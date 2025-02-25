@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-1
+    environment:
+      POSTGRES_USER: $(SPRING_DATASOURCE_USERNAME)  
+      POSTGRES_PASSWORD: $(SPRING_DATASOURCE_PASSWORD)    
+      POSTGRES_DB: $(SPRING_DATASOURCE_DB)         
+    ports:
+      - "5432:5432"
+    volumes:
+      - apirest_postgres-data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer-1
+    ports:
+      - "8080:8080"
+
+volumes:
+  apirest_postgres-data:
